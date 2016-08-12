@@ -20,7 +20,12 @@ $(function() {
     e.stopPropagation();
   });
 
+  $('input').on('click', function(e) {
+    e.stopPropagation();
+  });
+
   $('.popup').on('click', function(e) {
+    e.stopPropagation();
     $(this).fadeOut();
   });
 });

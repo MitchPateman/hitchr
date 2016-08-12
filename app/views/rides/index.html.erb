@@ -1,14 +1,11 @@
-<h1>All Rides</h1>
 <% @rides.reverse.each do |ride| %>
-        <div class="grid">
-          <figure class="effect-sadie">
-          <%=image_tag ride.user.avatar.url, class: "user-avatar"%>
-            <figcaption>
-              <h2><%= ride.user.first_name %><span><%= ride.user.last_name %></span></h2>
-              <p>Date: <%= ride.date.strftime("%b %-d, %Y") %><br>Time: <%= ride.time.strftime("%-l:%M %p") %></p>
-              <a href="<%= ride_path(ride) %>">View Ride</a>
-            </figcaption>
-          </figure>
-
-        </div>
-    <%end%>
+  <div class="grid">
+    <figure class="effect-sadie">
+      <figcaption>
+        <h2>Departs: <%= ride.date.strftime("%b %-d, %Y") %> at <%= ride.time.strftime("%-l:%M %p") %><span><br>Price: $<%= ride.price %></span></h2>
+        <p>From: <%= @ride.start_location %> to: <%= @ride.end_location %><br>Driver: <%= ride.user.first_name %></p>
+        <a href="<%= ride_path(ride) %>">View Ride</a>
+      </figcaption>
+    </figure>
+  </div>
+<%end%>

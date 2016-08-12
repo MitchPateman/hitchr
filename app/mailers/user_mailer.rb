@@ -6,6 +6,11 @@ class UserMailer < ApplicationMailer
     mail(to: @user.email, subject: "Welcome to Hitchr!")
   end
 
+  def deleted_user(user)
+    @user = user
+    mail(to: @user.email, subject: "User Profile Deleted from Hitchr!")
+  end
+
   # 2. Setup an email for the driver to see when someone requests a seat
   def seat_confirmation(ride, booking)
     @ride = ride
@@ -48,7 +53,17 @@ class UserMailer < ApplicationMailer
       mail(to: email, subject: "Your ride from #{ride.start_location} to
       #{ride.end_location} on #{@ride.date.strftime("%b %-d, %Y")} has been cancelled!")
     end
+  end
 
+  def complete_ride(ride)
+    @ride = ride
+
+    @ride.bookings.each do |booking|
+      email = booking.user.email
+      @booking = booking
+      mail(to: email, subject: "Your ride from #{@ride.start_location} to
+      #{@ride.end_location} on #{@ride.date.strftime("%b %-d, %Y")} has been completed!")
+    end
   end
 
 end
